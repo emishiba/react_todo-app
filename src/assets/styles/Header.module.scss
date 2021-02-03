@@ -1,0 +1,13 @@
+.root {
+  background: transparent;
+
+  .toolbar {
+    background-color: #b69a92;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+
+    .title {
+      font-size: 2rem;
+    }
+  }
+}
