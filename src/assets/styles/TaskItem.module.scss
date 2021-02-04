@@ -1,0 +1,30 @@
+.taskitem {
+  width: 50vw;
+  margin: auto;
+  padding: 10px;
+  background: #ede7e5;
+  border-radius: 10px;
+  display: flex;
+  margin-bottom: 20px;
+
+  justify-content: space-between;
+
+  &__left {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 5px;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+
+    button {
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
