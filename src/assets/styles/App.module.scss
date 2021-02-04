@@ -9,7 +9,10 @@
     outline: none;
   }
 }
-
+button {
+  border: none;
+  background: transparent;
+}
 .root {
   background: #825345;
   height: 100vh;

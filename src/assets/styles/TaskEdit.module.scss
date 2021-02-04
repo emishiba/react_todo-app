@@ -1,0 +1,18 @@
+.edit {
+  &__wrap {
+    width: 35vw;
+    background: #fff;
+    border-radius: 10px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 4vh 0;
+  }
+
+  &__title {
+    text-align: center;
+    margin-bottom: 2vh;
+    font-size: 1.5rem;
+  }
+}

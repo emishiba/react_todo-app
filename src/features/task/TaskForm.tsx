@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import styles from '../../assets/styles/TaskForm.module.scss';
 import TextField from '@material-ui/core/TextField';
 import { useForm } from 'react-hook-form';
-import { TaskList } from './index';
 import { useDispatch } from 'react-redux';
 import { createTask } from './taskSlice';
 
@@ -10,7 +9,11 @@ type Inputs = {
   taskTitle: string;
 };
 
-const TaskForm: React.FC = () => {
+type PropTypes = {
+  edit?: boolean;
+};
+
+const TaskForm: React.FC<PropTypes> = ({ edit }) => {
   const dispatch = useDispatch();
 
   const { register, handleSubmit, reset } = useForm();
@@ -23,18 +26,33 @@ const TaskForm: React.FC = () => {
     [dispatch]
   );
 
+  const handleEdit = useCallback(
+    (data: Inputs) => {
+      console.log(data);
+    },
+    [dispatch]
+  );
   return (
-    <form onSubmit={handleSubmit(handleCreate)} className={styles.form}>
-      <div className={styles.text__wrap}>
+    <form
+      className={styles.form}
+      onSubmit={edit ? handleSubmit(handleEdit) : handleSubmit(handleCreate)}
+    >
+      <div className={styles.form__wrap}>
         <TextField
-          label="New Task"
+          label={edit ? 'Edit Task' : 'New Task'}
           variant="outlined"
           inputRef={register}
           name="taskTitle"
-          className={styles.text__field}
+          className={styles.form__field}
+          defaultValue={edit ? 'default' : ''}
         />
+        {edit && (
+          <div className={styles.form__button}>
+            <button type="submit">Submit</button>
+            <button type="button">Cancel</button>
+          </div>
+        )}
       </div>
-      <TaskList />
     </form>
   );
 };
