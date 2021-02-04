@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './assets/styles/App.module.scss';
 import { Header } from './components/header/index';
-import { TaskForm } from './features/task/index';
+import { TaskForm, TaskList } from './features/task/index';
 
 const App: React.FC = () => {
   return (
@@ -9,6 +9,7 @@ const App: React.FC = () => {
       <div className={styles.wrapper}>
         <Header />
         <TaskForm />
+        <TaskList />
       </div>
     </div>
   );

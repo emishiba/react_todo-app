@@ -12,11 +12,11 @@ type PropTypes = {
     title: string;
     completed: boolean;
   };
+
+  handleModalToggle: () => void;
 };
 
-const TaskItem: React.FC<PropTypes> = ({ task }) => {
-  console.log(task);
-
+const TaskItem: React.FC<PropTypes> = ({ task, handleModalToggle }) => {
   return (
     <li className={styles.taskitem}>
       <div className={styles.taskitem__left}>
@@ -30,7 +30,7 @@ const TaskItem: React.FC<PropTypes> = ({ task }) => {
           name="checkedB"
           color="primary"
         />
-        <button>
+        <button onClick={handleModalToggle}>
           <CreateIcon />
         </button>
         <button>
