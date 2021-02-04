@@ -1,5 +1,11 @@
-.root {
-  .textfield {
+.text {
+  &__wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  &__field {
     width: 30vw;
   }
 }
