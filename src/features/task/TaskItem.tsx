@@ -1,19 +1,14 @@
 import React from 'react';
 import styles from '../../assets/styles/TaskItem.module.scss';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { TaskTypes } from './taskSlice';
 
 type PropTypes = {
-  task: {
-    id: number;
-    title: string;
-    completed: boolean;
-  };
-
-  handleModalToggle: () => void;
+  task: TaskTypes;
+  handleModalToggle: (task: TaskTypes) => void;
 };
 
 const TaskItem: React.FC<PropTypes> = ({ task, handleModalToggle }) => {
@@ -30,7 +25,7 @@ const TaskItem: React.FC<PropTypes> = ({ task, handleModalToggle }) => {
           name="checkedB"
           color="primary"
         />
-        <button onClick={handleModalToggle}>
+        <button onClick={() => handleModalToggle(task)}>
           <CreateIcon />
         </button>
         <button>

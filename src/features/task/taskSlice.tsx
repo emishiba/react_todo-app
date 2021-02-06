@@ -1,18 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunk, RootState } from '../../app/store';
 
+export type TaskTypes = {
+  id: number;
+  title: string;
+  completed: boolean;
+};
+
 type TaskState = {
   countId: number;
-  tasks: {
-    id: number;
-    title: string;
-    completed: boolean;
-  }[];
-  selectedTask: {
-    id: number;
-    title: string;
-    completed: boolean;
-  };
+  tasks: TaskTypes[];
+  selectedTask: TaskTypes;
   isModalOpen: boolean;
 };
 
@@ -38,15 +36,40 @@ export const taskSlice = createSlice({
 
       state.tasks = [newTask, ...state.tasks];
     },
+    selectTask: (state: TaskState, action: PayloadAction<TaskTypes>) => {
+      state.selectedTask = action.payload;
+    },
+
+    editTask: (state: TaskState, action) => {
+      state.tasks.filter((task) => {
+        task.id === action.payload.id && (task.title = action.payload.title);
+      });
+    },
+
+    handleModal: (state: TaskState, action: PayloadAction<boolean>) => {
+      state.isModalOpen = action.payload;
+    },
   },
 });
 
-export const { createTask } = taskSlice.actions;
+export const {
+  createTask,
+  handleModal,
+  selectTask,
+  editTask,
+} = taskSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectTask = (state: RootState): TaskState['tasks'] =>
+export const selectTasks = (state: RootState): TaskState['tasks'] =>
   state.task.tasks;
+
+export const selectIsModalOpen = (state: RootState): TaskState['isModalOpen'] =>
+  state.task.isModalOpen;
+
+export const selectSelectedTask = (
+  state: RootState
+): TaskState['selectedTask'] => state.task.selectedTask;
 
 export default taskSlice.reducer;
