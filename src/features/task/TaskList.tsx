@@ -1,26 +1,24 @@
 import React, { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { selectTask } from './taskSlice';
+import { selectTasks, selectTask } from './taskSlice';
 import { TaskItem, TaskEdit } from './index';
 import styles from '../../assets/styles/TaskList.module.scss';
 import Modal from '@material-ui/core/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleModal, selectIsModalOpen } from './taskSlice';
+import { TaskTypes } from './taskSlice';
 
 const TaskList: React.FC = () => {
-  const tasks = useSelector(selectTask);
+  const tasks = useSelector(selectTasks);
+  const dispatch = useDispatch();
+  const isModalOpen = useSelector(selectIsModalOpen);
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  const [open, setOpen] = useState<boolean>(false);
-
-  const handleModalToggle = useCallback(() => {
-    setOpen(!open);
-  }, [open]);
+  const handleModalToggle = useCallback(
+    (task: TaskTypes) => {
+      dispatch(selectTask(task));
+      dispatch(handleModal(!isModalOpen));
+    },
+    [isModalOpen]
+  );
 
   return (
     <>
@@ -29,12 +27,14 @@ const TaskList: React.FC = () => {
           <TaskItem
             key={task.id}
             task={task}
-            handleModalToggle={handleModalToggle}
+            handleModalToggle={() => handleModalToggle(task)}
           />
         ))}
       </ul>
-      <Modal open={open} onClose={handleModalToggle}>
-        <TaskEdit />
+      <Modal open={isModalOpen} onClose={handleModalToggle}>
+        <div>
+          <TaskEdit />
+        </div>
       </Modal>
     </>
   );
