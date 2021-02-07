@@ -76,14 +76,10 @@ export const {
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectTasks = (state: RootState): TaskState['tasks'] =>
-  state.task.tasks;
+export const selectTasks = (state: RootState) => state.task.tasks;
 
-export const selectIsModalOpen = (state: RootState): TaskState['isModalOpen'] =>
-  state.task.isModalOpen;
+export const selectIsModalOpen = (state: RootState) => state.task.isModalOpen;
 
-export const selectSelectedTask = (
-  state: RootState
-): TaskState['selectedTask'] => state.task.selectedTask;
+export const selectSelectedTask = (state: RootState) => state.task.selectedTask;
 
 export default taskSlice.reducer;
