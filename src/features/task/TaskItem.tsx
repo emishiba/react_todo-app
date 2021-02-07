@@ -4,7 +4,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { TaskTypes } from './taskSlice';
+import { TaskTypes, completeTask, deleteTask } from './taskSlice';
+import { useDispatch, useSelector } from 'react-redux';
+
+// const selector = useSelector((state) => state);
 
 type PropTypes = {
   task: TaskTypes;
@@ -12,6 +15,8 @@ type PropTypes = {
 };
 
 const TaskItem: React.FC<PropTypes> = ({ task, handleModalToggle }) => {
+  const dispatch = useDispatch();
+
   return (
     <li className={styles.taskitem}>
       <div className={styles.taskitem__left}>
@@ -21,14 +26,13 @@ const TaskItem: React.FC<PropTypes> = ({ task, handleModalToggle }) => {
       <div className={styles.taskitem__right}>
         <Checkbox
           checked={task.completed}
-          onChange={() => console.log(task.id)}
-          name="checkedB"
+          onChange={() => dispatch(completeTask(task))}
           color="primary"
         />
         <button onClick={() => handleModalToggle(task)}>
           <CreateIcon />
         </button>
-        <button>
+        <button onClick={() => dispatch(deleteTask(task))}>
           <DeleteIcon />
         </button>
       </div>
