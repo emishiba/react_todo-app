@@ -40,10 +40,22 @@ export const taskSlice = createSlice({
       state.selectedTask = action.payload;
     },
 
-    editTask: (state: TaskState, action) => {
-      state.tasks.filter((task) => {
-        task.id === action.payload.id && (task.title = action.payload.title);
-      });
+    completeTask: (state: TaskState, action: PayloadAction<TaskTypes>) => {
+      state.tasks.filter(
+        (task) =>
+          task.id === action.payload.id && (task.completed = !task.completed)
+      );
+    },
+
+    editTask: (state: TaskState, action: PayloadAction<TaskTypes>) => {
+      state.tasks.filter(
+        (task) =>
+          task.id === action.payload.id && (task.title = action.payload.title)
+      );
+    },
+
+    deleteTask: (state: TaskState, action: PayloadAction<TaskTypes>) => {
+      state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
     },
 
     handleModal: (state: TaskState, action: PayloadAction<boolean>) => {
@@ -54,9 +66,11 @@ export const taskSlice = createSlice({
 
 export const {
   createTask,
-  handleModal,
   selectTask,
+  completeTask,
   editTask,
+  deleteTask,
+  handleModal,
 } = taskSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
