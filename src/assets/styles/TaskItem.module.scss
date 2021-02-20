@@ -5,7 +5,7 @@
   background: #ede7e5;
   border-radius: 10px;
   display: flex;
-  margin-bottom: 20px;
+  margin: 20px auto;
 
   justify-content: space-between;
 
@@ -27,4 +27,7 @@
       cursor: pointer;
     }
   }
+}
+.MuiAppBar-colorPrimary {
+  background: transparent;
 }
