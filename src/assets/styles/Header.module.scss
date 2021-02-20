@@ -1,14 +1,8 @@
-.root {
-  background: transparent;
+.title {
+  padding: 20px;
+  font-size: 1.5rem;
+  color: #fff;
+  background-color: #b69a92;
+  border-radius: 10px 10px 0 0;
   margin-bottom: 20px;
-
-  .toolbar {
-    background-color: #b69a92;
-    border-radius: 10px 10px 0 0;
-    padding: 10px;
-
-    .title {
-      font-size: 2rem;
-    }
-  }
 }
